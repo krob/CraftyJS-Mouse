@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8" />
+	
+	<title>Simple Mouse Click</title>
+	<script type="text/javascript" src="../crafty.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		
+		function generateEnemies()
+		{
+			var tempX = Crafty.math.randomInt( 1, 378 );
+			var tempY = 0;
+			
+			Crafty.e( "Enemy, 2D, DOM, Color, Gravity, Mouse" )
+				.color( '#ffc000' )
+				.attr( 
+					{ 
+						x:tempX, 
+						y:tempY, 
+						w:20, 
+						h:20 
+					} 
+				)
+				.gravity()
+				.gravityConst( .0025 )
+				.bind(
+					"Click",
+					function()
+					{
+						console.log( 1 );
+						this.destroy();
+					}
+				);
+				
+			setTimeout( "generateEnemies()", 200 );
+		}
+		
+		window.onload = function()
+		{
+			Crafty.init(400, 400);
+				
+			Crafty.e( "LeftWall, Wall, 2D, DOM, Color" )
+				.color( '#000000' )
+				.attr( 
+					{ 
+						x:0, 
+						y:0, 
+						w:2, 
+						h:400 
+					} 
+				);
+				
+			Crafty.e( "RightWall, Wall, 2D, DOM, Color" )
+				.color( '#000000' )
+				.attr( 
+					{ 
+						x:398, 
+						y:0, 
+						w:2, 
+						h:400 
+					} 
+				);
+				
+			Crafty.e( "Bottom, 2D, DOM, Color" )
+				.color( '#dcdcdc' )
+				.attr( 
+					{ 
+						x:2, 
+						y:399, 
+						w:396, 
+						h:1,
+						z:100 
+					} 
+				);
+				
+			generateEnemies();
+		};
+		
+	</script>
+</body>
+</html>
+
